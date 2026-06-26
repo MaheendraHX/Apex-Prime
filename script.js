@@ -1,22 +1,10 @@
 /**
- * ==========================================================================
- * APEX PRIME — PRODUCTION JAVASCRIPT (GENESIS I)
- * Luxury, Minimalist Core Performance Architecture
- * ==========================================================================
+ * APEX PRIME — PRODUCTION JAVASCRIPT
  */
-
 document.addEventListener('DOMContentLoaded', () => {
     'use strict';
 
-    /* ==========================================================================
-       CONFIGURATION & CACHE
-       ========================================================================== */
-    
-    const TIMING = {
-        SPLASH_VISIBLE: 2500,
-        SPLASH_FADE: 800,
-        HERO_STAGGER: 180
-    };
+    const TIMING = { SPLASH_VISIBLE: 2500, SPLASH_FADE: 800, HERO_STAGGER: 180 };
 
     const DOM = {
         splashScreen: document.getElementById('splash-screen'),
@@ -32,11 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navLinks: document.querySelectorAll('.navbar ul a')
     };
 
-    /* ==========================================================================
-       SPLASH SCREEN & HERO SEQUENCE
-       ========================================================================== */
-
-    function initSplashAndHero() {
+    function initSequence() {
         if (DOM.splashScreen) {
             setTimeout(() => {
                 DOM.splashScreen.classList.add('fade');
@@ -51,72 +35,37 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function triggerHeroReveal() {
-        DOM.heroElements.forEach((element, index) => {
-            if (element) {
-                setTimeout(() => {
-                    element.classList.add('reveal-active');
-                }, index * TIMING.HERO_STAGGER);
-            }
+        DOM.heroElements.forEach((el, i) => {
+            if (el) setTimeout(() => el.classList.add('reveal-active'), i * TIMING.HERO_STAGGER);
         });
     }
 
-    /* ==========================================================================
-       SECTION REVEAL (ONE-TIME OBSERVATION)
-       ========================================================================== */
-
-    function initSectionReveals() {
-        if (!DOM.sections.length) return;
-
-        const revealOptions = {
-            root: null,
-            threshold: 0.15 
-        };
-
-        const sectionObserver = new IntersectionObserver((entries, observer) => {
+    function initObservers() {
+        const sectionObserver = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('show-section');
-                    observer.unobserve(entry.target); 
+                    obs.unobserve(entry.target);
                 }
             });
-        }, revealOptions);
+        }, { threshold: 0.15 });
 
-        DOM.sections.forEach(section => sectionObserver.observe(section));
-    }
-
-    /* ==========================================================================
-       NAVIGATION STATE (ACTIVE LINK HIGHLIGHTING)
-       ========================================================================== */
-
-    function initNavigationHighlight() {
-        if (!DOM.sections.length || !DOM.navLinks.length) return;
-
-        const navOptions = {
-            root: null,
-            rootMargin: '-20% 0px -70% 0px' 
-        };
+        DOM.sections.forEach(s => sectionObserver.observe(s));
 
         const navObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const activeId = entry.target.getAttribute('id');
-                    
+                    const id = entry.target.getAttribute('id');
                     DOM.navLinks.forEach(link => {
-                        // Correct logic: remove 'active' from all, add to matching link
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === `#${activeId}`) {
-                            link.classList.add('active');
-                        }
+                        link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
                     });
                 }
             });
-        }, navOptions);
+        }, { rootMargin: '-20% 0px -70% 0px' });
 
-        DOM.sections.forEach(section => navObserver.observe(section));
+        DOM.sections.forEach(s => navObserver.observe(s));
     }
 
-    // Execution
-    initSplashAndHero();
-    initSectionReveals();
-    initNavigationHighlight();
+    initSequence();
+    initObservers();
 });
