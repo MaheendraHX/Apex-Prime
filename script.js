@@ -136,3 +136,15 @@ window.addEventListener("load", () => {
 }, {
     once: true
 });
+
+        trackedSections.forEach((section) => {
+            navigationObserver.observe(section);
+        });
+    };
+
+    initSectionReveal();
+    initActiveNavigation();
+    initSplashScreen();
+}, {
+    once: true
+});
