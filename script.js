@@ -1,50 +1,138 @@
+"use strict";
+
 window.addEventListener("load", () => {
+    const SPLASH_HOLD_DELAY = 2500;
+    const SPLASH_FADE_DURATION = 1300;
+    const HERO_STAGGER_DELAY = 180;
+    const SECTION_REVEAL_THRESHOLD = 0.18;
 
-    const splash = document.getElementById("splash-screen");
+    const documentBody = document.body;
+    const splashScreen = document.getElementById("splash-screen");
+    const navigation = document.querySelector("nav");
+    const heroTag = document.querySelector(".hero-tag");
+    const heroHeading = document.querySelector(".hero-content h1");
+    const heroParagraph = document.querySelector(".hero-content p");
+    const ctaButton = document.querySelector(".btn");
+    const scrollIndicator = document.querySelector(".scroll-indicator");
+    const revealSections = document.querySelectorAll(".section");
+    const navigationLinks = document.querySelectorAll('nav a[href^="#"]');
 
-    const nav = document.querySelector("nav");
-    const title = document.querySelector(".hero-content h1");
-    const text = document.querySelector(".hero-content p");
-    const button = document.querySelector(".btn");
+    documentBody.classList.add("is-loading");
 
-    // Logo stays visible for 2.5 seconds
+    const revealElement = (element, delay = 0) => {
+        if (!element) return;
 
-    setTimeout(() => {
+        window.setTimeout(() => {
+            element.classList.add("show");
+        }, delay);
+    };
 
-        // Fade only the logo
+    const animateHero = () => {
+        [
+            navigation,
+            heroTag,
+            heroHeading,
+            heroParagraph,
+            ctaButton,
+            scrollIndicator
+        ].forEach((element, index) => {
+            revealElement(element, index * HERO_STAGGER_DELAY);
+        });
+    };
 
-        splash.classList.add("fade");
+    const removeSplashScreen = () => {
+        if (!splashScreen) {
+            documentBody.classList.remove("is-loading");
+            animateHero();
+            return;
+        }
 
-        // Remove splash after logo fades
+        splashScreen.classList.add("fade");
 
-        setTimeout(() => {
+        window.setTimeout(() => {
+            splashScreen.remove();
+            documentBody.classList.remove("is-loading");
+            animateHero();
+        }, SPLASH_FADE_DURATION);
+    };
 
-            splash.remove();
+    const initSplashScreen = () => {
+        window.setTimeout(removeSplashScreen, SPLASH_HOLD_DELAY);
+    };
 
-            // Animate website
+    const initSectionReveal = () => {
+        if (!revealSections.length || !("IntersectionObserver" in window)) {
+            revealSections.forEach((section) => {
+                section.classList.add("show-section");
+            });
+            return;
+        }
 
-            nav.classList.add("show");
+        const sectionObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
 
-            setTimeout(() => {
+                entry.target.classList.add("show-section");
+                observer.unobserve(entry.target);
+            });
+        }, {
+            threshold: SECTION_REVEAL_THRESHOLD
+        });
 
-                title.classList.add("show");
+        revealSections.forEach((section) => {
+            sectionObserver.observe(section);
+        });
+    };
 
-            },200);
+    const clearActiveNavigation = () => {
+        navigationLinks.forEach((link) => {
+            link.classList.remove("active");
+        });
+    };
 
-            setTimeout(() => {
+    const setActiveNavigation = (sectionId) => {
+        clearActiveNavigation();
 
-                text.classList.add("show");
+        if (!sectionId) return;
 
-            },500);
+        const activeLink = document.querySelector(`nav a[href="#${sectionId}"]`);
 
-            setTimeout(() => {
+        if (activeLink) {
+            activeLink.classList.add("active");
+        }
+    };
 
-                button.classList.add("show");
+    const initActiveNavigation = () => {
+        const trackedSections = ["about", "hub", "contact"]
+            .map((id) => document.getElementById(id))
+            .filter(Boolean);
 
-            },800);
+        if (!trackedSections.length || !("IntersectionObserver" in window)) return;
 
-        },1300);
+        const navigationObserver = new IntersectionObserver((entries) => {
+            const visibleEntry = entries
+                .filter((entry) => entry.isIntersecting)
+                .sort((first, second) => second.intersectionRatio - first.intersectionRatio)[0];
 
-    },2500);
+            if (visibleEntry) {
+                setActiveNavigation(visibleEntry.target.id);
+                return;
+            }
 
+            clearActiveNavigation();
+        }, {
+            rootMargin: "-35% 0px -45% 0px",
+            threshold: [0.15, 0.35, 0.6]
+        });
+
+        trackedSections.forEach((section) => {
+            navigationObserver.observe(section);
+        });
+    };
+
+    initSectionReveal();
+    initActiveNavigation();
+    initSplashScreen();
+}, {
+    once: true
 });
