@@ -3,6 +3,7 @@
 window.addEventListener("load", () => {
     const SPLASH_HOLD_DELAY = 2500;
     const SPLASH_FADE_DURATION = 1300;
+    const HERO_START_BEFORE_SPLASH_END = 650;
     const HERO_STAGGER_DELAY = 180;
     const SECTION_REVEAL_THRESHOLD = 0.18;
 
@@ -42,9 +43,17 @@ window.addEventListener("load", () => {
         });
     };
 
-    const removeSplashScreen = () => {
+    const finishSplash = () => {
+        documentBody.classList.remove("is-loading");
+
+        if (splashScreen) {
+            splashScreen.remove();
+        }
+    };
+
+    const startSplashExit = () => {
         if (!splashScreen) {
-            documentBody.classList.remove("is-loading");
+            finishSplash();
             animateHero();
             return;
         }
@@ -52,10 +61,10 @@ window.addEventListener("load", () => {
         splashScreen.classList.add("fade");
 
         window.setTimeout(() => {
-            splashScreen.remove();
-            documentBody.classList.remove("is-loading");
             animateHero();
-        }, SPLASH_FADE_DURATION);
+        }, Math.max(0, SPLASH_FADE_DURATION - HERO_START_BEFORE_SPLASH_END));
+
+        window.setTimeout(finishSplash, SPLASH_FADE_DURATION);
     };
 
     const initSectionReveal = () => {
@@ -131,7 +140,7 @@ window.addEventListener("load", () => {
     initSectionReveal();
     initActiveNavigation();
 
-    window.setTimeout(removeSplashScreen, SPLASH_HOLD_DELAY);
+    window.setTimeout(startSplashExit, SPLASH_HOLD_DELAY);
 }, {
     once: true
 });
