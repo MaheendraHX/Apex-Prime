@@ -1,86 +1,216 @@
-/* ==========================================================================
-   APEX PRIME — MASTER PRODUCTION STYLESHEET (GENESIS I)
-   Luxury, Minimalist Automotive Discovery Hub
-   ========================================================================== */
+/*==================================================
+    HERO CONTENT
+==================================================*/
 
-:root {
-    /* Color Palette */
-    --bg-color: #fcfcfc;
-    --primary-text: #111111;
-    --secondary-text: #666666;
-    --accent-gold: #b8860b;
-    --divider-gold: #e6d6aa;
+.hero-content{
 
-    /* Typography System */
-    --font-serif: "Didot", "Bodoni MT", "Cinzel", "Playfair Display", serif;
-    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    width:min(var(--max-width),90%);
 
-    /* Transition Profiles */
-    --transition-luxury: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    --transition-anim: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    margin:auto;
 
-    /* Layout Spacing */
-    --spacing-section: 12rem;
-    --container-width: 1200px;
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:flex-start;
+
 }
 
-/* ==========================================================================
-   BASE & RESET
-   ========================================================================== */
+.hero-tag{
 
-html { scroll-behavior: smooth; box-sizing: border-box; font-size: 16px; background-color: var(--bg-color); }
-*, *::before, *::after { box-sizing: inherit; margin: 0; padding: 0; }
-body { font-family: var(--font-sans); color: var(--primary-text); background-color: var(--bg-color); line-height: 1.8; overflow-x: hidden; }
+    display:inline-block;
 
-/* Splash Screen */
-#splash-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.8s ease; }
-#splash-screen.fade { opacity: 0; pointer-events: none; }
+    margin-bottom:28px;
 
-/* ==========================================================================
-   ANIMATION STATES (Triggered by JS)
-   ========================================================================== */
-.navbar, .hero-tag, .hero-content h1, .hero-content p, .btn, .scroll-indicator, .section {
-    opacity: 0; transform: translateY(30px); transition: var(--transition-anim);
+    color:var(--gold);
+
+    font-size:13px;
+
+    font-weight:600;
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
+
 }
-.reveal-active, .show-section { opacity: 1 !important; transform: translateY(0) !important; }
 
-/* ==========================================================================
-   HERO & NAV
-   ========================================================================== */
-#hero { min-height: 100vh; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 3.5rem 4rem; position: relative; }
-.navbar { width: 100%; max-width: var(--container-width); display: flex; justify-content: space-between; align-items: center; z-index: 100; }
-.brand { font-family: var(--font-serif); font-size: 1.4rem; color: var(--primary-text); text-decoration: none; text-transform: uppercase; letter-spacing: 0.18em; }
-.brand span { color: var(--accent-gold); }
-.navbar ul { display: flex; list-style: none; gap: 4.5rem; }
-.navbar a:not(.brand) { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--secondary-text); text-decoration: none; transition: color 0.4s ease; }
-.navbar a.active { color: var(--accent-gold) !important; }
 
-.hero-content { max-width: 900px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.hero-tag { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.35em; color: var(--accent-gold); margin-bottom: 3.5rem; }
-h1 { font-family: var(--font-serif); font-size: clamp(3.5rem, 7.5vw, 6rem); font-weight: 300; line-height: 1.2; margin-bottom: 3.5rem; }
-.btn { display: inline-block; padding: 1.35rem 3.8rem; border: 1px solid var(--accent-gold); color: var(--primary-text); text-transform: uppercase; letter-spacing: 0.2em; text-decoration: none; }
+/*==================================================
+    HERO HEADING
+==================================================*/
 
-/* ==========================================================================
-   SECTION ARCHITECTURE
-   ========================================================================== */
-.section { padding: var(--spacing-section) 0; border-top: 1px solid var(--divider-gold); }
-.section-container { max-width: var(--container-width); margin: 0 auto; padding: 0 4rem; }
-.section-label { display: block; font-size: 0.75rem; letter-spacing: 0.3em; color: var(--accent-gold); margin-bottom: 1.75rem; }
-h2 { font-family: var(--font-serif); font-size: clamp(2.4rem, 4.5vw, 3.8rem); font-weight: 300; margin-bottom: 3rem; }
+.hero-content h1{
 
-/* Brand Grid */
-.brand-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
-.brand-card { display: flex; flex-direction: column; min-height: 360px; padding: 4.5rem 3.5rem; border: 1px solid var(--accent-gold); text-decoration: none; color: var(--primary-text); transition: var(--transition-luxury); }
-.brand-card:hover { transform: translateY(-8px); background-color: #fff; box-shadow: 0 25px 55px rgba(184, 134, 11, 0.06); }
-.brand-card h3 { font-family: var(--font-serif); font-size: 2.4rem; font-weight: 300; margin-bottom: 0.5rem; }
+    font-size:clamp(70px,9vw,140px);
 
-/* Contact & Footer */
-.contact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 5.5rem; border-top: 1px solid var(--divider-gold); padding-top: 5rem; }
-.footer { padding: 9rem 0; text-align: center; border-top: 1px solid var(--divider-gold); }
-.footer-brand { font-family: var(--font-serif); font-size: 1.4rem; letter-spacing: 0.4em; }
+    font-weight:300;
 
-/* ==========================================================================
-   RESPONSIVE
-   ========================================================================== */
-@media (max-width: 1100px) { .brand-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 768px) { .brand-grid { grid-template-columns: 1fr; } .navbar ul { gap: 2rem; } }
+    line-height:.92;
+
+    letter-spacing:-4px;
+
+    opacity:0;
+
+    transform:translateY(55px);
+
+}
+
+.hero-content p{
+
+    margin-top:38px;
+
+    max-width:700px;
+
+    color:var(--muted);
+
+    font-size:19px;
+
+    line-height:2;
+
+    opacity:0;
+
+    transform:translateY(55px);
+
+}
+
+
+/*==================================================
+    BUTTON
+==================================================*/
+
+.btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin-top:55px;
+
+    padding:18px 42px;
+
+    border:1px solid var(--gold);
+
+    color:var(--gold);
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
+
+    font-size:13px;
+
+    transition:var(--transition);
+
+    opacity:0;
+
+    transform:translateY(55px);
+
+}
+
+.btn:hover{
+
+    background:var(--gold);
+
+    color:#fff;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 18px 35px rgba(184,134,11,.18);
+
+}
+
+
+/*==================================================
+    SCROLL INDICATOR
+==================================================*/
+
+.scroll-indicator{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    padding-bottom:38px;
+
+}
+
+.scroll-indicator span{
+
+    width:1px;
+
+    height:54px;
+
+    background:var(--divider);
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.scroll-indicator span::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:-100%;
+
+    width:100%;
+
+    height:100%;
+
+    background:var(--gold);
+
+    animation:scrollIndicator 2.2s infinite;
+
+}
+
+
+/*==================================================
+    SHOW ANIMATION
+==================================================*/
+
+.show{
+
+    opacity:1 !important;
+
+    transform:translateY(0) !important;
+
+    transition:
+
+        opacity 1s ease,
+
+        transform 1s cubic-bezier(.22,.61,.36,1);
+
+}
+
+
+/*==================================================
+    KEYFRAMES
+==================================================*/
+
+@keyframes scrollIndicator{
+
+    0%{
+
+        top:-100%;
+
+    }
+
+    100%{
+
+        top:100%;
+
+    }
+
+}
