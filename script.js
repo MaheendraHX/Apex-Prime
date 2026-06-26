@@ -1,50 +1,122 @@
-window.addEventListener("load", () => {
+/**
+ * ==========================================================================
+ * APEX PRIME — PRODUCTION JAVASCRIPT (GENESIS I)
+ * Luxury, Minimalist Core Performance Architecture
+ * ==========================================================================
+ */
 
-    const splash = document.getElementById("splash-screen");
+document.addEventListener('DOMContentLoaded', () => {
+    'use strict';
 
-    const nav = document.querySelector("nav");
-    const title = document.querySelector(".hero-content h1");
-    const text = document.querySelector(".hero-content p");
-    const button = document.querySelector(".btn");
+    /* ==========================================================================
+       CONFIGURATION & CACHE
+       ========================================================================== */
+    
+    const TIMING = {
+        SPLASH_VISIBLE: 2500,
+        SPLASH_FADE: 800,
+        HERO_STAGGER: 180
+    };
 
-    // Logo stays visible for 2.5 seconds
+    const DOM = {
+        splashScreen: document.getElementById('splash-screen'),
+        heroElements: [
+            document.querySelector('.navbar'),
+            document.querySelector('.hero-tag'),
+            document.querySelector('.hero-content h1'),
+            document.querySelector('.hero-content p'),
+            document.querySelector('.hero-content .btn'),
+            document.querySelector('.scroll-indicator')
+        ],
+        sections: document.querySelectorAll('.section'),
+        navLinks: document.querySelectorAll('.navbar ul a')
+    };
 
-    setTimeout(() => {
+    /* ==========================================================================
+       SPLASH SCREEN & HERO SEQUENCE
+       ========================================================================== */
 
-        // Fade only the logo
-
-        splash.classList.add("fade");
-
-        // Remove splash after logo fades
-
-        setTimeout(() => {
-
-            splash.remove();
-
-            // Animate website
-
-            nav.classList.add("show");
-
+    function initSplashAndHero() {
+        if (DOM.splashScreen) {
             setTimeout(() => {
+                DOM.splashScreen.classList.add('fade');
+                setTimeout(() => {
+                    DOM.splashScreen.remove();
+                    triggerHeroReveal();
+                }, TIMING.SPLASH_FADE);
+            }, TIMING.SPLASH_VISIBLE);
+        } else {
+            triggerHeroReveal();
+        }
+    }
 
-                title.classList.add("show");
+    function triggerHeroReveal() {
+        DOM.heroElements.forEach((element, index) => {
+            if (element) {
+                setTimeout(() => {
+                    element.classList.add('reveal-active');
+                }, index * TIMING.HERO_STAGGER);
+            }
+        });
+    }
 
-            },200);
+    /* ==========================================================================
+       SECTION REVEAL (ONE-TIME OBSERVATION)
+       ========================================================================== */
 
-            setTimeout(() => {
+    function initSectionReveals() {
+        if (!DOM.sections.length) return;
 
-                text.classList.add("show");
+        const revealOptions = {
+            root: null,
+            threshold: 0.15 
+        };
 
-            },500);
+        const sectionObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show-section');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, revealOptions);
 
-            setTimeout(() => {
+        DOM.sections.forEach(section => sectionObserver.observe(section));
+    }
 
-                button.classList.add("show");
+    /* ==========================================================================
+       NAVIGATION STATE (ACTIVE LINK HIGHLIGHTING)
+       ========================================================================== */
 
-            },800);
+    function initNavigationHighlight() {
+        if (!DOM.sections.length || !DOM.navLinks.length) return;
 
-        },1300);
+        const navOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px' 
+        };
 
-    },2500);
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const activeId = entry.target.getAttribute('id');
+                    
+                    DOM.navLinks.forEach(link => {
+                        // Correct logic: remove 'active' from all, add to matching link
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${activeId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, navOptions);
 
+        DOM.sections.forEach(section => navObserver.observe(section));
+    }
+
+    // Execution
+    initSplashAndHero();
+    initSectionReveals();
+    initNavigationHighlight();
 });
