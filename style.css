@@ -10,8 +10,8 @@ html {
 
 body {
     font-family: "Helvetica Neue", Arial, sans-serif;
-    background: #f4f0e7;
-    color: #111;
+    background: #050505;
+    color: #f8f4ea;
     overflow-x: hidden;
 }
 
@@ -27,7 +27,7 @@ a {
     position: fixed;
     inset: 0;
     background:
-        radial-gradient(circle at center, rgba(188, 141, 42, .18), transparent 34%),
+        radial-gradient(circle at center, rgba(215, 170, 48, .18), transparent 34%),
         linear-gradient(135deg, #000, #080806 55%, #000);
     display: flex;
     justify-content: center;
@@ -62,13 +62,13 @@ a {
     position: relative;
     width: 210px;
     height: 210px;
-    border: 1px solid rgba(188, 141, 42, .75);
+    border: 1px solid rgba(215, 170, 48, .75);
     border-radius: 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 90px rgba(188, 141, 42, .2), inset 0 0 35px rgba(188, 141, 42, .08);
+    box-shadow: 0 0 90px rgba(215, 170, 48, .2), inset 0 0 35px rgba(215, 170, 48, .08);
 }
 
 .splash-emblem::before,
@@ -76,7 +76,7 @@ a {
     content: "";
     position: absolute;
     border-radius: 50%;
-    border: 1px solid rgba(188, 141, 42, .18);
+    border: 1px solid rgba(215, 170, 48, .18);
 }
 
 .splash-emblem::before {
@@ -85,11 +85,11 @@ a {
 
 .splash-emblem::after {
     inset: -12px;
-    border-color: rgba(188, 141, 42, .08);
+    border-color: rgba(215, 170, 48, .08);
 }
 
 .splash-emblem span {
-    color: rgba(247, 245, 240, .72);
+    color: rgba(248, 244, 234, .72);
     font-size: 13px;
     letter-spacing: 6px;
     text-transform: uppercase;
@@ -107,7 +107,7 @@ a {
 .splash-line {
     width: 120px;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(188, 141, 42, .8), transparent);
+    background: linear-gradient(90deg, transparent, rgba(215, 170, 48, .86), transparent);
     animation: splashLine 2.5s ease forwards;
 }
 
@@ -115,7 +115,7 @@ a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #b8860b;
+    border: 1px solid #d7aa30;
     color: #d7aa30;
     font-weight: 300;
     letter-spacing: 2px;
@@ -129,7 +129,11 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 35px 0;
+    padding: 26px 22px;
+    margin-top: 18px;
+    border: 1px solid rgba(215, 170, 48, .18);
+    background: rgba(0, 0, 0, .34);
+    backdrop-filter: blur(18px);
     opacity: 0;
     transform: translateY(-40px);
 }
@@ -161,11 +165,11 @@ nav {
 nav ul {
     display: flex;
     list-style: none;
-    gap: 42px;
+    gap: 34px;
 }
 
 nav a {
-    color: #d7aa30;
+    color: #e6c66a;
     text-decoration: none;
     letter-spacing: 2px;
     font-size: 13px;
@@ -174,7 +178,7 @@ nav a {
 
 nav a:hover,
 nav a.active {
-    color: #f3d477;
+    color: #f8f4ea;
 }
 
 .hero {
@@ -194,7 +198,7 @@ nav a.active {
     inset: 0;
     background:
         radial-gradient(circle at 75% 45%, rgba(215, 170, 48, .18), transparent 28%),
-        linear-gradient(to bottom, rgba(0, 0, 0, .18), rgba(0, 0, 0, .72));
+        linear-gradient(to bottom, rgba(0, 0, 0, .18), rgba(0, 0, 0, .78));
     pointer-events: none;
 }
 
@@ -359,6 +363,7 @@ nav a.active {
     font-size: clamp(42px, 6vw, 86px);
     font-weight: 300;
     line-height: 1.02;
+    color: #f8f4ea;
 }
 
 .section-copy {
@@ -368,16 +373,15 @@ nav a.active {
 .section-copy p,
 .contact-intro p {
     margin-bottom: 24px;
-    color: #4c4a45;
+    color: rgba(248, 244, 234, .72);
     font-size: 18px;
     line-height: 1.9;
 }
 
 .about-section {
     background:
-        radial-gradient(circle at 12% 20%, rgba(188, 141, 42, .12), transparent 28%),
+        radial-gradient(circle at 12% 20%, rgba(215, 170, 48, .12), transparent 28%),
         linear-gradient(135deg, #080808, #111 55%, #050505);
-    color: #f8f4ea;
 }
 
 .about-section::before {
@@ -397,12 +401,10 @@ nav a.active {
     z-index: 1;
 }
 
-.about-section .section-copy p {
-    color: rgba(248, 244, 234, .74);
-}
-
 .collection-section {
-    background: #e9e1d2;
+    background:
+        radial-gradient(circle at 84% 20%, rgba(215, 170, 48, .12), transparent 28%),
+        linear-gradient(135deg, #0b0b0b, #141414 58%, #080808);
     overflow: hidden;
 }
 
@@ -411,7 +413,7 @@ nav a.active {
     position: absolute;
     right: -28px;
     top: 40px;
-    color: rgba(17, 17, 17, .04);
+    color: rgba(255, 255, 255, .035);
     font-size: clamp(80px, 15vw, 210px);
     font-weight: 300;
     letter-spacing: 8px;
@@ -435,14 +437,15 @@ nav a.active {
     background-position: center;
     position: relative;
     overflow: hidden;
-    transition: transform .35s ease;
+    border: 1px solid rgba(215, 170, 48, .16);
+    transition: transform .35s ease, border-color .35s ease;
 }
 
 .collection-card::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, .15), rgba(0, 0, 0, .76));
+    background: linear-gradient(to bottom, rgba(0, 0, 0, .18), rgba(0, 0, 0, .82));
 }
 
 .collection-card > * {
@@ -452,6 +455,7 @@ nav a.active {
 
 .collection-card:hover {
     transform: translateY(-8px);
+    border-color: rgba(215, 170, 48, .55);
 }
 
 .collection-card span {
@@ -488,7 +492,8 @@ nav a.active {
 }
 
 .hub-section {
-    background: linear-gradient(135deg, #111, #171717 55%, #080808);
+    background:
+        linear-gradient(135deg, #090909, #141414 55%, #050505);
     color: #f8f4ea;
 }
 
@@ -516,7 +521,7 @@ nav a.active {
 
 .brand-card {
     min-height: 430px;
-    border: 1px solid rgba(247, 245, 240, .14);
+    border: 1px solid rgba(215, 170, 48, .15);
     background: rgba(255, 255, 255, .035);
     display: flex;
     flex-direction: column;
@@ -584,6 +589,7 @@ nav a.active {
     margin-top: 28px;
     font-size: 27px;
     font-weight: 300;
+    color: #f8f4ea;
 }
 
 .brand-card p {
@@ -603,12 +609,17 @@ nav a.active {
     padding-bottom: 6px;
 }
 
+.brand-card a:hover {
+    color: #f3d477;
+    border-color: #f3d477;
+}
+
 .contact-section {
     overflow: hidden;
     padding: 150px 0;
     background:
-        radial-gradient(circle at 12% 18%, rgba(188, 141, 42, .14), transparent 30%),
-        linear-gradient(135deg, #f4f0e7, #e9e1d2);
+        radial-gradient(circle at 12% 18%, rgba(215, 170, 48, .14), transparent 30%),
+        linear-gradient(135deg, #070707, #111 58%, #050505);
 }
 
 .contact-section::before {
@@ -616,7 +627,7 @@ nav a.active {
     position: absolute;
     right: -24px;
     bottom: -28px;
-    color: rgba(17, 17, 17, .035);
+    color: rgba(255, 255, 255, .035);
     font-size: clamp(86px, 16vw, 220px);
     font-weight: 300;
     letter-spacing: 8px;
@@ -648,47 +659,91 @@ nav a.active {
 }
 
 .contact-card {
-    min-height: 220px;
+    position: relative;
+    min-height: 230px;
     padding: 30px;
-    border: 1px solid rgba(17, 17, 17, .12);
-    background: rgba(255, 255, 255, .42);
+    border: 1px solid rgba(215, 170, 48, .16);
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, .025));
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden;
     transition: transform .35s ease, border-color .35s ease, background .35s ease, box-shadow .35s ease;
 }
 
-.contact-card-main {
-    grid-column: 1 / -1;
-    min-height: 260px;
-    background: linear-gradient(135deg, rgba(17, 17, 17, .96), rgba(33, 30, 24, .96));
-    color: #f8f4ea;
-    border-color: rgba(188, 141, 42, .45);
+.contact-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(215, 170, 48, .12), transparent 36%);
+    opacity: 0;
+    transition: opacity .35s ease;
 }
 
 .contact-card:hover {
     transform: translateY(-8px);
-    border-color: rgba(188, 141, 42, .55);
-    background: rgba(255, 255, 255, .62);
-    box-shadow: 0 24px 60px rgba(17, 17, 17, .08);
+    border-color: rgba(215, 170, 48, .58);
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, .075), rgba(255, 255, 255, .035));
+    box-shadow: 0 24px 70px rgba(0, 0, 0, .34);
+}
+
+.contact-card:hover::before {
+    opacity: 1;
+}
+
+.contact-card-main {
+    grid-column: 1 / -1;
+    min-height: 270px;
+    background:
+        linear-gradient(135deg, rgba(24, 20, 12, .96), rgba(7, 7, 7, .98));
+    border-color: rgba(215, 170, 48, .44);
+}
+
+.contact-icon {
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(215, 170, 48, .32);
+    display: grid;
+    place-items: center;
+    color: #d7aa30;
+}
+
+.contact-icon svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.contact-kicker,
+.contact-card h3,
+.contact-card a {
+    position: relative;
+    z-index: 1;
 }
 
 .contact-kicker {
-    color: #9a740d;
+    color: #d7aa30;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 3px;
     text-transform: uppercase;
-}
-
-.contact-card-main .contact-kicker {
-    color: #d7aa30;
+    padding-right: 54px;
 }
 
 .contact-card h3 {
     margin-top: 34px;
     font-size: 30px;
     font-weight: 300;
+    color: #f8f4ea;
 }
 
 .contact-card-main h3 {
@@ -698,35 +753,37 @@ nav a.active {
 .contact-card a {
     margin-top: 34px;
     width: fit-content;
-    color: inherit;
+    color: #f8f4ea;
     text-decoration: none;
     font-size: 15px;
     line-height: 1.6;
     letter-spacing: 1px;
-    border-bottom: 1px solid rgba(188, 141, 42, .55);
+    border-bottom: 1px solid rgba(215, 170, 48, .55);
     padding-bottom: 7px;
     overflow-wrap: anywhere;
 }
 
 .contact-card a:hover {
-    color: #b8860b;
+    color: #d7aa30;
+    border-color: #d7aa30;
 }
 
 footer {
     width: min(1200px, 90%);
     margin: auto;
     padding: 38px 0;
-    border-top: 1px solid rgba(17, 17, 17, .16);
+    border-top: 1px solid rgba(215, 170, 48, .18);
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    color: #555;
+    color: rgba(248, 244, 234, .56);
     letter-spacing: 4px;
     font-size: 12px;
+    background: #050505;
 }
 
 .footer-brand {
-    color: #111;
+    color: #d7aa30;
 }
 
 .show {
@@ -822,6 +879,10 @@ footer {
 }
 
 @media (max-width: 620px) {
+    nav {
+        padding: 24px 16px;
+    }
+
     .brand {
         font-size: 22px;
         letter-spacing: 4px;
@@ -831,6 +892,11 @@ footer {
         width: 34px;
         height: 34px;
         margin-right: 10px;
+    }
+
+    nav a,
+    .btn {
+        letter-spacing: 2px;
     }
 
     .hero-content h1 {
@@ -856,8 +922,13 @@ footer {
 
     .contact-card,
     .contact-card-main {
-        min-height: 210px;
+        min-height: 220px;
         padding: 26px;
+    }
+
+    .contact-icon {
+        top: 24px;
+        right: 24px;
     }
 
     footer {
