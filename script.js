@@ -13,6 +13,7 @@ window.addEventListener("load", () => {
     const heroHeading = document.querySelector(".hero-content h1");
     const heroParagraph = document.querySelector(".hero-content p");
     const ctaButton = document.querySelector(".btn");
+    const heroNote = document.querySelector(".hero-note");
     const scrollIndicator = document.querySelector(".scroll-indicator");
     const revealSections = document.querySelectorAll(".section");
     const navigationLinks = document.querySelectorAll('nav a[href^="#"]');
@@ -34,6 +35,7 @@ window.addEventListener("load", () => {
             heroHeading,
             heroParagraph,
             ctaButton,
+            heroNote,
             scrollIndicator
         ].forEach((element, index) => {
             revealElement(element, index * HERO_STAGGER_DELAY);
@@ -99,7 +101,7 @@ window.addEventListener("load", () => {
     };
 
     const initActiveNavigation = () => {
-        const trackedSections = ["about", "hub", "contact"]
+        const trackedSections = ["about", "collection", "hub", "contact"]
             .map((id) => document.getElementById(id))
             .filter(Boolean);
 
