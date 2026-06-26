@@ -56,10 +56,6 @@ window.addEventListener("load", () => {
         }, SPLASH_FADE_DURATION);
     };
 
-    const initSplashScreen = () => {
-        window.setTimeout(removeSplashScreen, SPLASH_HOLD_DELAY);
-    };
-
     const initSectionReveal = () => {
         if (!revealSections.length || !("IntersectionObserver" in window)) {
             revealSections.forEach((section) => {
@@ -132,19 +128,8 @@ window.addEventListener("load", () => {
 
     initSectionReveal();
     initActiveNavigation();
-    initSplashScreen();
-}, {
-    once: true
-});
 
-        trackedSections.forEach((section) => {
-            navigationObserver.observe(section);
-        });
-    };
-
-    initSectionReveal();
-    initActiveNavigation();
-    initSplashScreen();
+    window.setTimeout(removeSplashScreen, SPLASH_HOLD_DELAY);
 }, {
     once: true
 });
