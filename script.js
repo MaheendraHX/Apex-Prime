@@ -1,71 +1,50 @@
-/**
- * APEX PRIME — PRODUCTION JAVASCRIPT
- */
-document.addEventListener('DOMContentLoaded', () => {
-    'use strict';
+window.addEventListener("load", () => {
 
-    const TIMING = { SPLASH_VISIBLE: 2500, SPLASH_FADE: 800, HERO_STAGGER: 180 };
+    const splash = document.getElementById("splash-screen");
 
-    const DOM = {
-        splashScreen: document.getElementById('splash-screen'),
-        heroElements: [
-            document.querySelector('.navbar'),
-            document.querySelector('.hero-tag'),
-            document.querySelector('.hero-content h1'),
-            document.querySelector('.hero-content p'),
-            document.querySelector('.hero-content .btn'),
-            document.querySelector('.scroll-indicator')
-        ],
-        sections: document.querySelectorAll('.section'),
-        navLinks: document.querySelectorAll('.navbar ul a')
-    };
+    const nav = document.querySelector("nav");
+    const title = document.querySelector(".hero-content h1");
+    const text = document.querySelector(".hero-content p");
+    const button = document.querySelector(".btn");
 
-    function initSequence() {
-        if (DOM.splashScreen) {
+    // Logo stays visible for 2.5 seconds
+
+    setTimeout(() => {
+
+        // Fade only the logo
+
+        splash.classList.add("fade");
+
+        // Remove splash after logo fades
+
+        setTimeout(() => {
+
+            splash.remove();
+
+            // Animate website
+
+            nav.classList.add("show");
+
             setTimeout(() => {
-                DOM.splashScreen.classList.add('fade');
-                setTimeout(() => {
-                    DOM.splashScreen.remove();
-                    triggerHeroReveal();
-                }, TIMING.SPLASH_FADE);
-            }, TIMING.SPLASH_VISIBLE);
-        } else {
-            triggerHeroReveal();
-        }
-    }
 
-    function triggerHeroReveal() {
-        DOM.heroElements.forEach((el, i) => {
-            if (el) setTimeout(() => el.classList.add('reveal-active'), i * TIMING.HERO_STAGGER);
-        });
-    }
+                title.classList.add("show");
 
-    function initObservers() {
-        const sectionObserver = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('show-section');
-                    obs.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.15 });
+            },200);
 
-        DOM.sections.forEach(s => sectionObserver.observe(s));
+            setTimeout(() => {
 
-        const navObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute('id');
-                    DOM.navLinks.forEach(link => {
-                        link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
-                    });
-                }
-            });
-        }, { rootMargin: '-20% 0px -70% 0px' });
+                text.classList.add("show");
 
-        DOM.sections.forEach(s => navObserver.observe(s));
-    }
+            },500);
 
-    initSequence();
-    initObservers();
+            setTimeout(() => {
+
+                button.classList.add("show");
+
+            },800);
+
+        },1300);
+
+    },2500);
+
 });
