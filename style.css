@@ -1,3 +1,6 @@
+Absolutely. Here’s the **full `style.css`** with the Bentley and Lamborghini hub images fixed, plus the black/gold theme and contact icons styling included.
+
+```css
 * {
     margin: 0;
     padding: 0;
@@ -557,7 +560,7 @@ nav a.active {
 }
 
 .bentley .brand-image {
-    background-image: url("https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=900&q=80");
+    background-image: url("https://images.unsplash.com/photo-1621135802920-133df287f89c?auto=format&fit=crop&w=900&q=80");
 }
 
 .ferrari .brand-image {
@@ -565,7 +568,7 @@ nav a.active {
 }
 
 .lamborghini .brand-image {
-    background-image: url("https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=900&q=80");
+    background-image: url("https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=900&q=80");
 }
 
 .brand-content {
@@ -937,3 +940,4 @@ footer {
         text-align: center;
     }
 }
+```
